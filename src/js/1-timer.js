@@ -29,7 +29,7 @@ const options = {
         else
         {
             iziToast.show({
-                message: '❌ Please choose a date in the future',
+                message: 'Please choose a date in the future',
                 color: 'red',
             position: 'topRight'        });
     startBtn.setAttribute("disabled",'');    }
@@ -63,17 +63,19 @@ const start = () => {
     datainput.setAttribute('disabled', '');
     intervalId = setInterval(() => { 
         const deltatime = userSelectedDate - Date.now();
-        if(Math.floor(deltatime / 1000) === 0) {
+        if (deltatime <= 0) {
             clearInterval(intervalId);
-            startBtn.removeAttribute('disabled', '');
-            datainput.removeAttribute('disabled', '');
+            updateClock(addLeadingZero(convertMs(0)));
+            startBtn.setAttribute('disabled', '');
+            datainput.removeAttribute('disabled');
+            return;
         }
-        console.log(Math.floor(deltatime / 1000));
+
         const time = convertMs(deltatime);
         const addZeroes = addLeadingZero(time);
         updateClock(addZeroes);
-    }, 1000);
 
+    }, 1000);
 }
 
 function addLeadingZero({ days, hours, minutes, seconds }) { 
