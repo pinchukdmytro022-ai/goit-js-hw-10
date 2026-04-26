@@ -1,9 +1,9 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 const submitForm = document.querySelector('.form');
-const delayInput = document.querySelector('.delay-input');
-const fulfInput = document.querySelector('.fulf-input');
-const rejInput = document.querySelector('.rej-input');
+const delayInput = document.querySelector('input[name="delay"][type="number"]');
+const fulfInput = document.querySelector('input[name="state"][value="fulfilled"]');
+const rejInput = document.querySelector('input[name="state"][value="rejected"]');
 
 const executor = (resolve, reject) => { 
     const inputValve = parseInt(delayInput.value);
